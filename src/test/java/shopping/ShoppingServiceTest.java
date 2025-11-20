@@ -1,7 +1,6 @@
 package shopping;
 
 import customer.Customer;
-import customer.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -110,8 +109,8 @@ class ShoppingServiceTest {
 
     /**
      * Проверка покупки продуктов, когда продуктов недостаточно
-     * Проверяем, что 1 корзину можно купить
-     * Проверяем, что 2 корзину нельзя купить
+     * Проверяем, что 1-ую корзину можно купить
+     * Проверяем, что 2-ую корзину нельзя купить
      * Проверяем, выброс исключения и читаемость ошибки
      * Проверяем изменения в бд 1 раз
      */
@@ -134,9 +133,7 @@ class ShoppingServiceTest {
         Assertions.assertEquals("В наличии нет необходимого количества товара 'test1'", e.getMessage());
         Assertions.assertEquals(4, product1.getCount());
 
-        Mockito.verify(productDaoMock, Mockito.times(1)).save(Mockito.argThat(
-                product -> "test1".equals(product.getName())
-        ));
+        Mockito.verify(productDaoMock, Mockito.times(1)).save(product1);
     }
 
     /**
