@@ -51,7 +51,7 @@ class ShoppingServiceTest {
         Cart cart2 = shoppingService.getCart(customer2);
 
         Assertions.assertTrue(cart1.getProducts().containsKey(product1));
-        Assertions.assertEquals(2, cart1.getProducts().get("test1"));
+        Assertions.assertEquals(2, cart1.getProducts().get(product1));
         Assertions.assertFalse(cart1.getProducts().containsKey(product2));
 
         Assertions.assertFalse(cart2.getProducts().containsKey(product1));
@@ -101,11 +101,11 @@ class ShoppingServiceTest {
         Assertions.assertEquals(4, product1.getCount());
         Assertions.assertEquals(0, product2.getCount());
 
-        Mockito.verify(productDaoMock).save(product1);
-        Mockito.verify(productDaoMock).save(product2);
-
         Assertions.assertEquals(0, shoppingService.getCart(customer1).getProducts().size());
         Assertions.assertEquals(0, shoppingService.getCart(customer2).getProducts().size());
+
+        Mockito.verify(productDaoMock).save(product1);
+        Mockito.verify(productDaoMock).save(product2);
     }
 
     /**
@@ -130,10 +130,10 @@ class ShoppingServiceTest {
         cart2.add(product1, 5);
 
         Assertions.assertTrue(shoppingService.buy(cart1));
-
         BuyException e = Assertions.assertThrows(BuyException.class, () -> shoppingService.buy(cart2));
         Assertions.assertEquals("В наличии нет необходимого количества товара 'test1'", e.getMessage());
         Assertions.assertEquals(4, product1.getCount());
+
         Mockito.verify(productDaoMock, Mockito.times(1)).save(Mockito.argThat(
                 product -> "test1".equals(product.getName())
         ));
