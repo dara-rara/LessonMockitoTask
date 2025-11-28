@@ -2,7 +2,7 @@ package shopping;
 
 import customer.Customer;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,8 +33,8 @@ class ShoppingServiceTest {
      * Инициализация тестового окружения:
      * Создание экземляра покупателя
      */
-    @BeforeEach
-    void initEach() {
+    @BeforeAll
+    void init() {
         this.customer1 = new Customer(1, "111");
     }
 
