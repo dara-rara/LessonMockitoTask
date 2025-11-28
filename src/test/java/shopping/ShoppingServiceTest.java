@@ -1,10 +1,7 @@
 package shopping;
 
 import customer.Customer;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -17,6 +14,7 @@ import product.ProductDao;
  * @author Daria
  */
 @ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Тесты ShoppingService")
 class ShoppingServiceTest {
 
